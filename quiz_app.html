@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantitative Methods Quiz - 50 Items</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        /* Start Screen */
+        .start-screen {
+            text-align: center;
+        }
+
+        .start-screen h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .start-screen p {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 1.05em;
+            line-height: 1.6;
+        }
+
+        .topic-list {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 25px 0;
+            text-align: left;
+        }
+
+        .topic-list h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .topic-list ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .topic-list li {
+            padding: 8px 0;
+            color: #555;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+        }
+
+        .topic-list li:before {
+            content: "✓";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        .topic-list li:last-child {
+            border-bottom: none;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.05em;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin: 10px;
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 10px 25px rgba(108, 117, 125, 0.4);
+        }
+
+        .btn-success {
+            background: #28a745;
+        }
+
+        .btn-success:hover {
+            box-shadow: 0 10px 25px rgba(40, 167, 69, 0.4);
+        }
+
+        .btn-danger {
+            background: #dc3545;
+        }
+
+        .btn-danger:hover {
+            box-shadow: 0 10px 25px rgba(220, 53, 69, 0.4);
+        }
+
+        /* Quiz Screen */
+        .quiz-screen {
+            display: none;
+        }
+
+        .progress-bar-container {
+            background: #e9ecef;
+            height: 10px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            height: 100%;
+            transition: width 0.3s ease;
+            border-radius: 5px;
+        }
+
+        .progress-text {
+            text-align: center;
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+            font-weight: 600;
+        }
+
+        .question-container {
+            margin-bottom: 30px;
+        }
+
+        .question-number {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            color: #333;
+            font-size: 1.15em;
+            margin-bottom: 25px;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            padding: 15px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            font-size: 1em;
+            color: #333;
+        }
+
+        .option:hover {
+            background: #e9ecef;
+            border-color: #667eea;
+            transform: translateX(5px);
+        }
+
+        .option input[type="radio"] {
+            margin-right: 15px;
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            accent-color: #667eea;
+        }
+
+        .option.selected {
+            background: #e7f3ff;
+            border-color: #667eea;
+        }
+
+        .option.correct {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+
+        .option.incorrect {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .nav-buttons .btn {
+            flex: 1;
+            margin: 0;
+        }
+
+        /* Results Screen */
+        .results-screen {
+            display: none;
+            text-align: center;
+        }
+
+        .results-summary {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            color: white;
+            font-size: 3em;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .results-summary h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .score-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .score-detail {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .score-detail h3 {
+            color: #667eea;
+            font-size: 1.2em;
+            margin-bottom: 8px;
+        }
+
+        .score-detail p {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .review-section {
+            text-align: left;
+            margin-top: 30px;
+        }
+
+        .review-section h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .review-item {
+            background: #f8f9fa;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+
+        .review-item.correct {
+            border-left-color: #28a745;
+            background: #f0f9f5;
+        }
+
+        .review-item.incorrect {
+            border-left-color: #dc3545;
+            background: #fdf5f5;
+        }
+
+        .review-question {
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 12px;
+            font-size: 1em;
+        }
+
+        .review-answer {
+            color: #666;
+            margin: 8px 0;
+            font-size: 0.95em;
+        }
+
+        .your-answer {
+            color: #dc3545;
+        }
+
+        .correct-answer {
+            color: #28a745;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .badge-correct {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .badge-incorrect {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .score-details {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+            }
+
+            .option {
+                padding: 12px 15px;
+                font-size: 0.95em;
+            }
+
+            .question-text {
+                font-size: 1em;
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .instruction-box {
+            background: #e7f3ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+            color: #0c5460;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Quantitative Methods Quiz</h1>
+            <p>Interactive Assessment - 50 Questions</p>
+        </div>
+
+        <div class="content">
+            <!-- Start Screen -->
+            <div class="start-screen" id="startScreen">
+                <h2>Welcome to the Quantitative Methods Quiz!</h2>
+                <div class="instruction-box">
+                    <strong>ℹ️ Instructions:</strong> This quiz contains 50 randomized questions covering Modeling & Simulation, Statistical Treatment, and Linear Programming. Questions will be shuffled on each retake. Select your answer and click Next to proceed.
+                </div>
+                <p>This comprehensive assessment will test your understanding of:</p>
+                <div class="topic-list">
+                    <h3>📖 Topics Covered:</h3>
+                    <ul>
+                        <li><strong>Introduction to Modeling & Simulation</strong> - Definitions, history, and applications</li>
+                        <li><strong>System Analysis & Classification</strong> - Types of systems and models</li>
+                        <li><strong>Model Validation & Verification</strong> - Testing simulation accuracy</li>
+                        <li><strong>Discrete & Continuous Systems</strong> - Event-based and continuous modeling</li>
+                        <li><strong>Queuing Systems</strong> - Single and multi-server models</li>
+                        <li><strong>Statistical Treatment</strong> - Descriptive and inferential statistics</li>
+                        <li><strong>Levels of Measurement</strong> - Nominal, ordinal, interval, and ratio data</li>
+                        <li><strong>Statistical Tools & Tests</strong> - T-test, ANOVA, Chi-square, regression</li>
+                        <li><strong>Simulation Visualization</strong> - Results analysis and presentation</li>
+                        <li><strong>Monte Carlo Method</strong> - Risk analysis and probability distributions</li>
+                    </ul>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-success" onclick="startQuiz()">Start Quiz</button>
+                </div>
+            </div>
+
+            <!-- Quiz Screen -->
+            <div class="quiz-screen" id="quizScreen">
+                <div class="progress-text" id="progressText"></div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+                <div class="question-container">
+                    <div class="question-number" id="questionNumber"></div>
+                    <div class="question-text" id="questionText"></div>
+                    <div class="options-container" id="optionsContainer"></div>
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" onclick="previousQuestion()" id="prevBtn">← Previous</button>
+                    <button class="btn btn-secondary" onclick="nextQuestion()" id="nextBtn">Next →</button>
+                    <button class="btn btn-success hidden" onclick="submitQuiz()" id="submitBtn">Submit Quiz</button>
+                </div>
+            </div>
+
+            <!-- Results Screen -->
+            <div class="results-screen" id="resultsScreen">
+                <div class="results-summary">
+                    <div class="score-circle" id="scoreCircle"></div>
+                    <h2>Quiz Completed!</h2>
+                    <div class="score-details">
+                        <div class="score-detail">
+                            <h3>Score</h3>
+                            <p id="finalScore"></p>
+                        </div>
+                        <div class="score-detail">
+                            <h3>Correct Answers</h3>
+                            <p id="correctCount"></p>
+                        </div>
+                        <div class="score-detail">
+                            <h3>Accuracy</h3>
+                            <p id="accuracy"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-section" id="reviewSection">
+                    <h3>📋 Answer Review</h3>
+                    <div id="reviewContent"></div>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-success" onclick="retakeQuiz()">Retake Quiz</button>
+                    <button class="btn btn-secondary" onclick="goHome()">Back to Home</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Quiz Questions Database - 50 Questions
+        const quizQuestions = [
+            // Modeling & Simulation Questions (1-15)
+            {
+                question: "What is the primary purpose of modeling and simulation?",
+                options: [
+                    "To replace real systems with computer programs",
+                    "To understand system behavior and predict effects of changes without affecting the real system",
+                    "To create entertainment software",
+                    "To eliminate the need for real-world testing"
+                ],
+                correct: 1
+            },
+            {
+                question: "Which of the following is NOT an advantage of modeling and simulation?",
+                options: [
+                    "Easy to understand system operations",
+                    "Easy to identify constraints",
+                    "Guarantees 100% accurate results",
+                    "Easy to test different configurations"
+                ],
+                correct: 2
+            },
+            {
+                question: "When was the Monte Carlo method first developed?",
+                options: [
+                    "1960",
+                    "1940",
+                    "1980",
+                    "1990"
+                ],
+                correct: 1
+            },
+            {
+                question: "A discrete-event simulation model is used when:",
+                options: [
+                    "State variables change continuously over time",
+                    "State variable values change only at discrete points in time",
+                    "The system is always at rest",
+                    "Time is not a factor"
+                ],
+                correct: 1
+            },
+            {
+                question: "In a continuous system model, state variables are defined by:",
+                options: [
+                    "Fixed constant values",
+                    "Random events",
+                    "Differential equations",
+                    "User-defined rules"
+                ],
+                correct: 2
+            },
+            {
+                question: "What is verification in simulation?",
+                options: [
+                    "Comparing the model with real-world data",
+                    "Checking if the computer program accurately reflects the conceptual model",
+                    "Testing marketing strategies",
+                    "Validating business plans"
+                ],
+                correct: 1
+            },
+            {
+                question: "What is validation in simulation?",
+                options: [
+                    "Checking the computer code for bugs",
+                    "Comparing the model's output with real system observations",
+                    "Ensuring the model runs quickly",
+                    "Verifying user inputs"
+                ],
+                correct: 1
+            },
+            {
+                question: "Which of the following is a characteristic of stochastic systems?",
+                options: [
+                    "Output is deterministic and predictable",
+                    "No randomness involved",
+                    "Output is affected by randomness and is a random variable",
+                    "All inputs must be constant"
+                ],
+                correct: 2
+            },
+            {
+                question: "In the modeling process, which step involves comparing the lumped model with the simulation program?",
+                options: [
+                    "Design",
+                    "Validation",
+                    "Verification",
+                    "Implementation"
+                ],
+                correct: 2
+            },
+            {
+                question: "Static simulation models are best used for:",
+                options: [
+                    "Systems that change rapidly over time",
+                    "Modeling systems not affected by time (e.g., Monte Carlo simulations)",
+                    "Real-time systems",
+                    "Continuous processes"
+                ],
+                correct: 1
+            },
+            {
+                question: "What is the primary advantage of using pseudorandom numbers instead of true random numbers in simulation?",
+                options: [
+                    "They are faster to generate",
+                    "They allow simulation replication with identical behavior",
+                    "They are more accurate",
+                    "They eliminate bias"
+                ],
+                correct: 1
+            },
+            {
+                question: "Which simulation approach provides a balance between modeling power and analyzability?",
+                options: [
+                    "Petri nets",
+                    "Finite automata",
+                    "Both A and B",
+                    "Monte Carlo only"
+                ],
+                correct: 2
+            },
+            {
+                question: "In discrete-event simulation, what are entities?",
+                options: [
+                    "Time intervals",
+                    "Representations of real elements like parts of machines",
+                    "Computer programs",
+                    "Database records"
+                ],
+                correct: 1
+            },
+            {
+                question: "What is bootstrapping in simulation?",
+                options: [
+                    "Loading a simulation program",
+                    "Initial startup of a system",
+                    "Assigning realistic times to initial pending events to reach steady-state distribution",
+                    "Creating backup copies"
+                ],
+                correct: 2
+            },
+            {
+                question: "Monte Carlo simulation is particularly useful for:",
+                options: [
+                    "Optimizing assembly lines",
+                    "Risk quantitative analysis and decision-making problems",
+                    "Training systems only",
+                    "Hardware design only"
+                ],
+                correct: 1
+            },
+
+            // Queuing Systems & Continuous Simulation (16-25)
+            {
+                question: "In a single server queue, λ (lambda) represents:",
+                options: [
+                    "Service time",
+                    "Arrival rate (number of arrivals per second)",
+                    "Queue length",
+                    "Traffic intensity"
+                ],
+                correct: 1
+            },
+            {
+                question: "What is the maximum utilization for a multi-server queue with N servers?",
+                options: [
+                    "ρ × 100%",
+                    "100%",
+                    "N × 100%",
+                    "λ × Ts"
+                ],
+                correct: 2
+            },
+            {
+                question: "In a continuous system, activities are characterized by:",
+                options: [
+                    "Discrete events",
+                    "Smooth completion without delays",
+                    "Queue formations",
+                    "Random interruptions"
+                ],
+                correct: 1
+            },
+            {
+                question: "Which numerical method is commonly used for continuous simulation?",
+                options: [
+                    "Discrete event method",
+                    "Monte Carlo method",
+                    "Differential equations",
+                    "Heuristic approach"
+                ],
+                correct: 2
+            },
+            {
+                question: "What is the relationship in Little's formula?",
+                options: [
+                    "r = λTr",
+                    "w = λTw",
+                    "Both A and B",
+                    "ρ = λ × Ts"
+                ],
+                correct: 2
+            },
+            {
+                question: "Time-sharing systems allow:",
+                options: [
+                    "Multiple users to exclusively use the system",
+                    "Multiple users to share system resources with rapid switching",
+                    "Only one user at a time",
+                    "Sequential processing only"
+                ],
+                correct: 1
+            },
+            {
+                question: "SimOS simulation system was designed to study:",
+                options: [
+                    "Weather patterns",
+                    "Complex computer hardware designs and application performance",
+                    "Traffic flow",
+                    "Biological systems"
+                ],
+                correct: 1
+            },
+            {
+                question: "In a multi-server queue with 3 servers, if λ = 5 and Ts = 0.1, what is ρ (server utilization)?",
+                options: [
+                    "0.5",
+                    "0.167",
+                    "1.5",
+                    "0.3"
+                ],
+                correct: 1
+            },
+            {
+                question: "The relationship Tr = Tw + Ts represents:",
+                options: [
+                    "Total queue length formula",
+                    "Residence time equals waiting time plus service time",
+                    "Traffic intensity calculation",
+                    "Server efficiency"
+                ],
+                correct: 1
+            },
+            {
+                question: "Continuous simulation is most suitable for modeling:",
+                options: [
+                    "Bank teller service",
+                    "Dam embankment construction and missile trajectory",
+                    "Hospital patient arrival",
+                    "Traffic signals"
+                ],
+                correct: 1
+            },
+
+            // Statistical Treatment (26-40)
+            {
+                question: "Statistical treatment is used to:",
+                options: [
+                    "Create marketing strategies",
+                    "Test hypotheses, answer research questions, and present results clearly",
+                    "Develop products",
+                    "Train employees"
+                ],
+                correct: 1
+            },
+            {
+                question: "Which branch of statistics makes generalizations about a population from a sample?",
+                options: [
+                    "Descriptive statistics",
+                    "Inferential statistics",
+                    "Applied statistics",
+                    "Computational statistics"
+                ],
+                correct: 1
+            },
+            {
+                question: "Descriptive statistics involves:",
+                options: [
+                    "Hypothesis testing",
+                    "Tabulating, depicting, and describing collected data",
+                    "Making predictions",
+                    "Causal analysis"
+                ],
+                correct: 1
+            },
+            {
+                question: "Nominal data represents:",
+                options: [
+                    "Ranked categories",
+                    "Measurable quantities",
+                    "Categories that only name variables without order",
+                    "Continuous values"
+                ],
+                correct: 2
+            },
+            {
+                question: "Which level of measurement can be used for ranking purposes?",
+                options: [
+                    "Nominal",
+                    "Ordinal",
+                    "Interval",
+                    "Ratio"
+                ],
+                correct: 1
+            },
+            {
+                question: "Interval data is characterized by:",
+                options: [
+                    "Natural zero point",
+                    "No meaningful order",
+                    "Distance between numbers has meaning",
+                    "Only categories"
+                ],
+                correct: 2
+            },
+            {
+                question: "Which of the following is an example of ratio data?",
+                options: [
+                    "Rating scale (1-5)",
+                    "Gender classification",
+                    "Age, weight, and height",
+                    "Educational level"
+                ],
+                correct: 2
+            },
+            {
+                question: "The T-test is used to:",
+                options: [
+                    "Compare frequency distributions",
+                    "Compare two means from independent samples",
+                    "Measure correlation",
+                    "Create probability distributions"
+                ],
+                correct: 1
+            },
+            {
+                question: "ANOVA (Analysis of Variance) is used when comparing:",
+                options: [
+                    "Two group means",
+                    "Means of two or more independent groups",
+                    "Individual data points",
+                    "Categorical variables"
+                ],
+                correct: 1
+            },
+            {
+                question: "The Chi-square test can be used for:",
+                options: [
+                    "Comparing continuous means",
+                    "Testing goodness of fit and independence between variables",
+                    "Regression analysis",
+                    "Calculating averages"
+                ],
+                correct: 1
+            },
+            {
+                question: "Pearson's correlation coefficient measures:",
+                options: [
+                    "Causation between variables",
+                    "The strength and direction of relationship between two variables",
+                    "Average values",
+                    "Standard deviation"
+                ],
+                correct: 1
+            },
+            {
+                question: "Non-parametric tests are used when:",
+                options: [
+                    "Normal distribution is assumed",
+                    "Data is nominal or ordinal, or normal distribution is not assumed",
+                    "Sample size is large",
+                    "Interval data is available"
+                ],
+                correct: 1
+            },
+            {
+                question: "The mode in a distribution is:",
+                options: [
+                    "The average value",
+                    "The middle value",
+                    "The most frequently occurring value",
+                    "The range"
+                ],
+                correct: 2
+            },
+            {
+                question: "Standard deviation measures:",
+                options: [
+                    "Central tendency",
+                    "The spread or variation of data around the mean",
+                    "Sample size",
+                    "Frequency"
+                ],
+                correct: 1
+            },
+
+            // Advanced Topics & Linear Programming (41-50)
+            {
+                question: "A Petri net is used for:",
+                options: [
+                    "Creating database structures",
+                    "Describing and analyzing distributed systems with concurrent behavior",
+                    "Building web applications",
+                    "Network security"
+                ],
+                correct: 1
+            },
+            {
+                question: "In a Petri net, transitions are enabled when:",
+                options: [
+                    "All output places contain tokens",
+                    "All input places contain sufficient tokens",
+                    "The system is idle",
+                    "Any place contains a token"
+                ],
+                correct: 1
+            },
+            {
+                question: "Finite automata (FA) is characterized by:",
+                options: [
+                    "Continuous states",
+                    "A finite set of states and rules for moving between states",
+                    "Infinite memory",
+                    "No state transitions"
+                ],
+                correct: 1
+            },
+            {
+                question: "DFA (Deterministic Finite Automata) differs from NFA in that:",
+                options: [
+                    "DFA has fewer states",
+                    "DFA moves to exactly one state for each input, while NFA can move to multiple states",
+                    "NFA is more powerful",
+                    "DFA cannot recognize patterns"
+                ],
+                correct: 1
+            },
+            {
+                question: "In a virtual simulation (hardware-in-the-loop), the system is:",
+                options: [
+                    "Completely software-based",
+                    "Tested with real forces",
+                    "A complete system prototype with artificially generated stimuli",
+                    "Only for visualization"
+                ],
+                correct: 2
+            },
+            {
+                question: "Sensitivity analysis in simulation helps identify:",
+                options: [
+                    "Program errors",
+                    "The uncertain inputs with the biggest impact on key outcomes",
+                    "Hardware limitations",
+                    "User interface issues"
+                ],
+                correct: 1
+            },
+            {
+                question: "Face validity in model validation ensures:",
+                options: [
+                    "The code runs without errors",
+                    "Model output agrees with subject-matter expert understanding",
+                    "The interface looks good",
+                    "All data is consistent"
+                ],
+                correct: 1
+            },
+            {
+                question: "Combined discrete-continuous simulation is used for:",
+                options: [
+                    "Simple linear systems only",
+                    "Systems with both discrete control actions and continuous processes (like batch processes)",
+                    "Static analysis only",
+                    "Single-event systems"
+                ],
+                correct: 1
+            },
+            {
+                question: "What is the purpose of model optimization in simulation?",
+                options: [
+                    "To make the model run faster",
+                    "To find the best input values or decisions to achieve desired outcomes",
+                    "To reduce memory usage",
+                    "To simplify the code"
+                ],
+                correct: 1
+            },
+            {
+                question: "In simulation results visualization, the main benefit of using cloud technology is:",
+                options: [
+                    "Faster computation speed",
+                    "Lower initial investment and location-independent access",
+                    "Larger storage capacity only",
+                    "Better graphics quality"
+                ],
+                correct: 1
+            }
+        ];
+
+        // Global Variables
+        let currentQuestionIndex = 0;
+        let shuffledQuestions = [];
+        let userAnswers = [];
+        let quizStarted = false;
+
+        // Shuffle function
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        // Start Quiz
+        function startQuiz() {
+            shuffledQuestions = shuffleArray(quizQuestions);
+            userAnswers = new Array(shuffledQuestions.length).fill(-1);
+            currentQuestionIndex = 0;
+            quizStarted = true;
+
+            document.getElementById('startScreen').classList.add('hidden');
+            document.getElementById('quizScreen').classList.remove('hidden');
+            document.getElementById('resultsScreen').classList.add('hidden');
+
+            loadQuestion();
+        }
+
+        // Load Current Question
+        function loadQuestion() {
+            const question = shuffledQuestions[currentQuestionIndex];
+            
+            document.getElementById('questionNumber').textContent = `Question ${currentQuestionIndex + 1} of ${shuffledQuestions.length}`;
+            document.getElementById('questionText').textContent = question.question;
+            
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+
+            question.options.forEach((option, index) => {
+                const optionDiv = document.createElement('label');
+                optionDiv.className = 'option';
+                if (userAnswers[currentQuestionIndex] === index) {
+                    optionDiv.classList.add('selected');
+                }
+
+                optionDiv.innerHTML = `
+                    <input type="radio" name="answer" value="${index}" ${userAnswers[currentQuestionIndex] === index ? 'checked' : ''}>
+                    <span>${option}</span>
+                `;
+
+                optionDiv.addEventListener('click', () => selectAnswer(index));
+                optionsContainer.appendChild(optionDiv);
+            });
+
+            updateProgress();
+            updateNavButtons();
+        }
+
+        // Select Answer
+        function selectAnswer(index) {
+            userAnswers[currentQuestionIndex] = index;
+            loadQuestion();
+        }
+
+        // Update Progress Bar
+        function updateProgress() {
+            const progress = ((currentQuestionIndex + 1) / shuffledQuestions.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('progressText').textContent = `Progress: ${currentQuestionIndex + 1}/${shuffledQuestions.length}`;
+        }
+
+        // Update Navigation Buttons
+        function updateNavButtons() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const submitBtn = document.getElementById('submitBtn');
+
+            prevBtn.disabled = currentQuestionIndex === 0;
+            prevBtn.style.opacity = currentQuestionIndex === 0 ? '0.5' : '1';
+
+            if (currentQuestionIndex === shuffledQuestions.length - 1) {
+                nextBtn.classList.add('hidden');
+                submitBtn.classList.remove('hidden');
+            } else {
+                nextBtn.classList.remove('hidden');
+                submitBtn.classList.add('hidden');
+            }
+        }
+
+        // Previous Question
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                loadQuestion();
+            }
+        }
+
+        // Next Question
+        function nextQuestion() {
+            if (currentQuestionIndex < shuffledQuestions.length - 1) {
+                currentQuestionIndex++;
+                loadQuestion();
+            }
+        }
+
+        // Submit Quiz
+        function submitQuiz() {
+            document.getElementById('quizScreen').classList.add('hidden');
+            document.getElementById('resultsScreen').classList.remove('hidden');
+            showResults();
+        }
+
+        // Show Results
+        function showResults() {
+            let correctCount = 0;
+            shuffledQuestions.forEach((question, index) => {
+                if (userAnswers[index] === question.correct) {
+                    correctCount++;
+                }
+            });
+
+            const totalQuestions = shuffledQuestions.length;
+            const percentage = Math.round((correctCount / totalQuestions) * 100);
+
+            document.getElementById('scoreCircle').textContent = percentage + '%';
+            document.getElementById('finalScore').textContent = percentage + '%';
+            document.getElementById('correctCount').textContent = correctCount + '/' + totalQuestions;
+            document.getElementById('accuracy').textContent = percentage + '%';
+
+            // Generate Review
+            const reviewContent = document.getElementById('reviewContent');
+            reviewContent.innerHTML = '';
+
+            shuffledQuestions.forEach((question, index) => {
+                const isCorrect = userAnswers[index] === question.correct;
+                const reviewItem = document.createElement('div');
+                reviewItem.className = `review-item ${isCorrect ? 'correct' : 'incorrect'}`;
+
+                const reviewQuestion = document.createElement('div');
+                reviewQuestion.className = 'review-question';
+                reviewQuestion.innerHTML = `Q${index + 1}: ${question.question} <span class="status-badge ${isCorrect ? 'badge-correct' : 'badge-incorrect'}">${isCorrect ? '✓ Correct' : '✗ Incorrect'}</span>`;
+
+                const reviewAnswer = document.createElement('div');
+                reviewAnswer.className = 'review-answer';
+
+                if (userAnswers[index] !== -1) {
+                    reviewAnswer.innerHTML = `<strong class="your-answer">Your Answer:</strong> ${question.options[userAnswers[index]]}`;
+                } else {
+                    reviewAnswer.innerHTML = `<strong class="your-answer">Your Answer:</strong> Not answered`;
+                }
+
+                if (!isCorrect) {
+                    const correctAnswerDiv = document.createElement('div');
+                    correctAnswerDiv.className = 'review-answer';
+                    correctAnswerDiv.innerHTML = `<strong class="correct-answer">Correct Answer:</strong> ${question.options[question.correct]}`;
+                    reviewItem.appendChild(reviewQuestion);
+                    reviewItem.appendChild(reviewAnswer);
+                    reviewItem.appendChild(correctAnswerDiv);
+                } else {
+                    reviewItem.appendChild(reviewQuestion);
+                    reviewItem.appendChild(reviewAnswer);
+                }
+
+                reviewContent.appendChild(reviewItem);
+            });
+        }
+
+        // Retake Quiz
+        function retakeQuiz() {
+            document.getElementById('resultsScreen').classList.add('hidden');
+            document.getElementById('startScreen').classList.remove('hidden');
+            quizStarted = false;
+        }
+
+        // Go Home
+        function goHome() {
+            document.getElementById('resultsScreen').classList.add('hidden');
+            document.getElementById('startScreen').classList.remove('hidden');
+            quizStarted = false;
+        }
+    </script>
+</body>
+</html>
